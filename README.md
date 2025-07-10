@@ -45,7 +45,7 @@ Set a chart title
 
 Pick a color theme
 
-<h3><u>ChartControls.jsx</u></h3>
+<h3><u>ChartControls.jsx </u></h3>
 It allows the user to:
 
 Select a chart type
