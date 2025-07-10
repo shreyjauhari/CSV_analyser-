@@ -105,7 +105,6 @@ The logo is: rounded
 
 Centered vertically in the header
 
-
 ### `Patient.jsx`
 The Patient component is a comprehensive UI module for:
 
