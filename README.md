@@ -75,7 +75,22 @@ The `DataPreview` component provides an interactive, paginated, and sortable pre
 - **Sorting:** Clicking a column header toggles sort direction (`asc` ↔ `desc`). Supports string and numeric sorting.
 - **Pagination:** Shows 10 rows per page with navigation buttons. Displays `...` when skipping large page ranges.
 - **Save Button:** Calls the `onSaveDetails` prop function with the currently sorted data set.
- 
+
+### `FileUpload.jsx`
+
+ A powerful and customizable CSV uploader with metadata-aware parsing and advanced filtering support for React. Built with Tailwind CSS, Lucide Icons, and PapaParse, this component allows users to:
+
+Upload and validate .csv files.
+
+Automatically parse structured multi-row headers.
+
+Preserve metadata rows.
+
+Preview and filter the parsed data interactively.
+
+Proceed with filtered data for further usage (e.g., chart generation or exporting).
+
+
 
 
 
