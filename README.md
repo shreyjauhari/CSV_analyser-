@@ -1,272 +1,159 @@
-# CSV Analyser
+📊 CSV Analyser
+CSV Analyser is a powerful, React-based web application for uploading, analyzing, visualizing, and managing CSV data. It supports dynamic chart generation, patient tracking, PDF export, and local storage of user-generated data – all wrapped in a clean, responsive UI.
 
-CSV Analyser is a simple React-based tool that allows users to upload a `.csv` file, filter its data, and export the filtered results as a downloadable PDF.
+🚀 Features
+✅ Upload and parse .csv files using PapaParse
 
-## 🚀 Features
+🔍 Preview, filter, and sort tabular data
 
-- Upload and parse CSV files
-- Filter data based on user-defined criteria
-- Export filtered data as a PDF
-- Clean and minimal UI built with React
+📈 Generate dynamic charts (Bar, Line, Pie, Area) with Recharts
 
-## 🛠 Tech Stack
+💾 Save data with metadata (name, description) and load it later
 
-- **React (JSX)**
-- **PapaParse** for CSV parsing
-- **jsPDF** (assumed for PDF generation – replace if using another)
+📄 Export filtered results as PDF using jsPDF
 
-## 📦 Installation
+🧑‍⚕️ Track patient progress with search functionality
 
-1. Clone the repository:
+📂 Upload and manage PDF prescriptions per patient (stored in localStorage)
 
-   ```bash
-   git clone https://github.com/shreyjauhari/csv-analyser.git
-   cd csv-analyser
-    npm install papaparse
-   npm run dev
-  
+🎨 Clean, responsive UI built with TailwindCSS and Lucide Icons
 
-<h2>2.refrence github repos :</h2>
-https://github.com/zakaria-29-dev/React-JS-UI-Design-Finance-Dashboard-Payments-updates
+🛠 Tech Stack
+React (JSX)
 
+PapaParse – CSV parsing
 
-<h2>3.Pages :</h2>
+jsPDF – PDF export
 
-### `ChartControls.jsx`
-It allows the user to:
+Recharts – Chart rendering
 
-Select a chart type
+TailwindCSS – UI styling
 
-Choose data columns for X and Y axes or label/value (depending on chart type)
+Lucide-react – Iconography
 
-Set a chart title
+📦 Installation
+bash
+Copy
+Edit
+git clone https://github.com/shreyjauhari/csv-analyser.git
+cd csv-analyser
+npm install
+npm run dev
+📁 Project Structure & Components
+✅ FileUpload.jsx
+CSV Upload and Preprocessing
 
-Pick a color theme
+Drag & drop or file-select interface
 
-### `ChartGenerator.jsx`
+Validates .csv format and parses multi-row headers
 
-This component is responsible for rendering dynamic charts based on uploaded CSV data. It supports four chart types: **Bar**, **Line**, **Area**, and **Pie**, and is built using `recharts`.
+Preserves metadata rows
 
-- Dynamically parses and transforms CSV data into a format suitable for charting
-- Automatically handles data sanitization (non-numeric Y values are treated as 0)
-- Provides user feedback for missing configuration or data
-- Custom tooltips and styling for enhanced UI
-- Responsive design for embedding in various layouts
+Allows interactive filtering before processing
 
+📋 DataPreview.jsx
+Sortable & Paginated Table Preview
 
+Displays parsed CSV data in a paginated table
 
-- **Bar Chart**
-- **Line Chart**
-- **Area Chart**
-- **Pie Chart**
+Supports sorting on any column (ascending/descending)
 
-### `DataPreview.jsx`
+Calls onSaveDetails with the filtered/sorted data
 
-The `DataPreview` component provides an interactive, paginated, and sortable preview of the uploaded CSV data. It's designed for quick inspection, sorting, and filtering before further processing (like saving or exporting).
+Uses Lucide icons for sorting indicators and actions
 
-#### 🧩 Features
+📊 ChartControls.jsx
+Dynamic Chart Configurator
 
-- Renders a styled, responsive table of CSV data
-- Supports sorting by column (ascending/descending)
-- Paginated view with navigation controls
-- Allows saving the sorted/filtered data via a callback (`onSaveDetails`)
-- Clean UI with hover states and intuitive design using Lucide icons
+Choose chart type: Bar, Line, Area, Pie
 
-- **Sorting:** Clicking a column header toggles sort direction (`asc` ↔ `desc`). Supports string and numeric sorting.
-- **Pagination:** Shows 10 rows per page with navigation buttons. Displays `...` when skipping large page ranges.
-- **Save Button:** Calls the `onSaveDetails` prop function with the currently sorted data set.
+Select data columns for X/Y axes or label/value
 
-### `FileUpload.jsx`
+Set custom chart titles and color themes
 
- A powerful and customizable CSV uploader with metadata-aware parsing and advanced filtering support for React. Built with Tailwind CSS, Lucide Icons, and PapaParse, this component allows users to:
+📈 ChartGenerator.jsx
+Chart Rendering Engine
 
-Upload and validate .csv files.
+Renders charts dynamically using user-selected config
 
-Automatically parse structured multi-row headers.
+Supports:
 
-Preserve metadata rows.
+Bar Chart
 
-Preview and filter the parsed data interactively.
+Line Chart
 
-Proceed with filtered data for further usage (e.g., chart generation or exporting).
+Area Chart
 
-### `Header.jsx`
-Renders a top-level navigation bar that adapts to screen size.
+Pie Chart
 
-Desktop (md+): Shows tabs horizontally with icons.
+Handles non-numeric values gracefully
 
-Mobile (<md): Displays a <select> dropdown for navigation.
+Custom tooltips and responsive layout
 
-Uses an image logo (imageLogo) imported from ./pics/image.png.
+🧑‍⚕️ TrackProgress.jsx
+Patient Search & Overview
 
-The logo is: rounded 
+Receives patient data from saved CSV
 
-15x20 units in size (custom w-15 h-20)
+Filters out invalid headers/empty rows
 
-Centered vertically in the header
+Ensures each entry has a unique Serial No.
 
+Real-time search by name, age, contact, or serial number
 
-### `Patient.jsx`
-The Patient component is a comprehensive UI module for:
+Clickable patient cards trigger onViewPatientDetails(...)
 
-Displaying a patient's details
+📁 Patient.jsx
+Patient Details & PDF Management
 
-Uploading, previewing, and storing PDF prescriptions
+Displays structured patient info
 
-Managing localStorage to persist file uploads across sessions
+Upload up to 3 PDF prescriptions (≤ 5MB each)
 
-patient: object – Patient data with fields like name, age, etc.
+Files stored in localStorage with metadata
 
-onBack: function – Callback to go back to the previous view
- 
-1. Patient Info Display
-Extracts common patient metadata (like name, age, diagnosis, etc.).
+Prevents duplicates by name/size
 
-Keys defined in DISPLAY_KEYS array.
+Real-time storage usage indicator
 
-Shown in a responsive 2-column layout using Tailwind grid.
+PDF list with delete & download options
 
-2. PDF Prescription Upload
-Allows users to upload up to 3 PDF files, with:
+💾 SavedFiles.jsx
+Saved CSV File Management
 
-Individual file size ≤ 5 MB
+Loads CSV files saved locally (e.g., IndexedDB or localStorage)
 
-File type must be application/pdf
+Displays metadata: name, rows, columns, upload date
 
-Duplicate name/size prevention
+Click to Load & Analyze, Download, or Delete
 
-Each upload is converted to Base64 using FileReader
+Shows aggregate stats: total files, charts, data points
 
-Base64 string saved in localStorage with metadata
+“Upload New File” button triggers file upload UI
 
-3. localStorage Management
-Uses a unique key per patient (e.g., patient_pdfs_123)
+💬 SaveDialog.jsx
+File Metadata Input & Save Confirmation
 
-Automatically saves and loads PDFs from localStorage
+Collects file name (required) and optional description
 
-Removes all files if prescription list is emptied
+Displays file summary (rows, columns, headers)
 
-Manages storage quota (limit: ~5MB)
+Calls onSave(name, description) on submit
 
- 4. Storage Usage Indicator
-Shows real-time usage of localStorage visually:
+Shows saving spinner and closes on success
 
-Storage bar with size (e.g., 1.2 MB / 5 MB)
+Cancel or X icon dismisses the dialog
 
-Dynamically updated after each upload/delete
+🧭 Header.jsx
+Responsive Navigation Header
 
-5. File Management
-Uploaded files appear in a list with:
+Shows logo and tab-based navigation (desktop)
 
-Name (linked to download)
+Displays dropdown navigation (mobile)
 
-File size and upload date
+Logo imported from ./pics/image.png
 
-Delete button (Trash2)
+Rounded and sized w-15 h-20
 
-### `SavedFiles.jsx`
-It displays and manages a list of saved CSV files that a user previously uploaded, providing options to view, download, delete, or analyze each file.
-
- Main Functionalities:
-Load and Display Saved CSV Files
-Loads files from a local IndexedDB (or another client-side storage via dbOperations.getAllCsvFiles()).
-
-Each file includes metadata: name, number of rows, columns, upload date, and optional description.
-
- Show File and Chart Stats
- 
-Calls dbOperations.getStats() to show:
-
-Total CSV files uploaded
-
-Total charts saved
-
-Total data points (sum of rows across files)
- 
-Clicking “Load & Analyze” runs onLoadFile(...) to send the file data to a parent component for analysis/charting.
- 
-Deletes a file after user confirmation using dbOperations.deleteCsvFile(...).
- 
-Allows downloading the file as a .csv by generating a Blob and triggering a download.
- 
-"Upload New File" button triggers onCreateNew() to open an upload UI (handled by the parent).
-
- ### `SaveDialog.jsx`
-
-1. Collect File Metadata
-Allows the user to:
-
-Enter a file name (required)
-
-Enter an optional description
-
-2.Display File Summary
-If data and headers are provided, it shows a mini summary:
-
-Number of rows
-
-Number of columns
-
-First 3 column headers
-
-3. Save the File
-When the "Save File" button is clicked:
-
-Validates that a file name is entered.
-
-Calls onSave(name, description) (passed in as a prop).
-
-Shows a loading spinner while saving.
-
-Closes the modal after a successful save.
-
-4.  Close the Dialog
-Clicking the  icon or "Cancel" button closes the modal via onClose().
-
-### `TrackProgress.jsx`
-1. Receive and Process Patient Data
-Takes savedDetails (array of rows) as a prop.
-
-Filters out invalid header rows or empty names.
-
-Ensures each patient has a serial number (S. NO.); if missing, generates one with a fallback like patient-0-<timestamp>.
-
-Stores the cleaned-up list in the patients state.
-
-2. Search Patients Dynamically
-The user can search by:
-
-Name
-
-Age
-
-Contact Number
-
-Serial Number
-
-Filters patient list in real time using useMemo.
-
-3. Display Patient Cards
-For each filtered patient:
-
-Shows Name, Serial Number, Age, and Contact.
-
-Cards are responsive and interactive.
-
-Clicking a card triggers onViewPatientDetails(patient) → likely opens a detailed view or modal.
-
-4. Handles Edge Cases Gracefully
-If no savedDetails → shows a default "no data" message.
-
-If no matches found from search → shows a specific "no matching results" message.
-
-Uses fallback text ('-') if fields like name, age, or contact are missing.
-
-
-
-
-
-
-
-
-
+🌐 Reference UI Inspiration
+ https://github.com/zakaria-29-dev/React-JS-UI-Design-Finance-Dashboard-Payments-updates
