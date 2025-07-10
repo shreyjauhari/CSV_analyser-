@@ -28,13 +28,13 @@ CSV Analyser is a simple React-based tool that allows users to upload a `.csv` f
    npm run dev
   
 
-2.refrence github repos :
+<h2>2.refrence github repos :</h2>
 https://github.com/zakaria-29-dev/React-JS-UI-Design-Finance-Dashboard-Payments-updates
 
 
-3.Pages :
+<h2>3.Pages :</h2>
 
-<h1>ChartControls.jsx</h1>
+<h3>ChartControls.jsx</h3>
 It allows the user to:
 
 Select a chart type
